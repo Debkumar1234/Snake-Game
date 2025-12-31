@@ -1,48 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Snake Game</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <main>
-        <section>
-            <div class="infos">
-                <div class="info">
-                    <h3>High Score:
-                        <span id="high-score">0</span>
-                    </h3>
-                </div>
-                <div class="info">
-                    <h3>Score:
-                        <span id="score">0</span>
-                    </h3>
-                </div>
-                <div class="info">
-                    <h3>Time:
-                        <span id="time">00:00</span>
-                    </h3>
-                </div>
-                
-            </div>
-            <div class="board">
-                
-            </div>
-        </section>
+      <section>
+        <div class="infos">
+          <div class="info">
+            <h3>
+              High Score:
+              <span id="high-score">0</span>
+            </h3>
+          </div>
+          <div class="info">
+            <h3>
+              Score:
+              <span id="score">0</span>
+            </h3>
+          </div>
+          <button id="pause-resume-btn" class="pause-btn info">
+            <!-- Pause Icon -->
+            <svg class="icon pause-icon" viewBox="0 0 24 24">
+              <rect x="5" y="4" width="4" height="16"></rect>
+              <rect x="15" y="4" width="4" height="16"></rect>
+            </svg>
 
-        <div class="modal">
-            <div class="start-game">
-                <h3>Welcome to the Snake Game</h3>
-                <button class="btn btn-start">Start Game</button>
-            </div>
-            <div class="game-over">
-                <h3>Game Over</h3>
-                <button class="btn btn-restart">Restart Game</button>
-            </div>
+            <!-- Play Icon -->
+            <svg class="icon play-icon" viewBox="0 0 24 24">
+              <polygon points="6,4 20,12 6,20"></polygon>
+            </svg>
+
+            <span class="btn-text">Pause</span>
+          </button>
+
+          <div class="info">
+            <h3>
+              Time:
+              <span id="time">00:00</span>
+            </h3>
+          </div>
         </div>
+        <div class="board"></div>
+      </section>
+
+      <div class="modal">
+        <div class="start-game">
+          <h3>Welcome to the Snake Game</h3>
+          <button class="btn btn-start">Start Game</button>
+        </div>
+        <div class="game-over">
+          <h3>Game Over</h3>
+          <button class="btn btn-restart">Restart Game</button>
+        </div>
+      </div>
     </main>
     <script src="script.js"></script>
-</body>
+  </body>
 </html>

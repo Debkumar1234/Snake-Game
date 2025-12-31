@@ -9,6 +9,8 @@ const highScoreElement = document.querySelector("#high-score");
 const scoreElement = document.querySelector("#score");
 const timeElement = document.querySelector("#time");
 
+const pauseResumeButton = document.querySelector("#pause-resume-btn");
+
 const blockHeight = 30;
 const blockWidth = 30;
 
@@ -23,6 +25,8 @@ const rows = Math.floor(board.clientHeight / blockHeight);
 
 let intervalId = null;
 let timerIntervalId = null;
+
+let isPaused = false;
 
 let food = {
   x: Math.floor(Math.random() * rows),
@@ -49,6 +53,8 @@ for (let row = 0; row < rows; row++) {
 }
 
 function render() {
+  if (isPaused) return;
+
   let head = null;
 
   blocks[`${food.x}-${food.y}`].classList.add("food");
@@ -127,6 +133,13 @@ function terminateGame() {
   modal.style.backgroundColor = "#b4141487";
 }
 
+pauseResumeButton.addEventListener("click", () => {
+  isPaused = !isPaused;
+  pauseResumeButton.querySelector(".btn-text").innerText =
+    isPaused ? "Resume" : "Pause";
+  pauseResumeButton.classList.toggle("paused", isPaused);
+});
+
 restartButton.addEventListener("click", restartGame);
 
 function restartGame() {
@@ -171,6 +184,7 @@ function startGame() {
 
 function startTimer() {
   timerIntervalId = setInterval(() => {
+    if (isPaused) return;
     let [min, sec] = time.split(":").map(Number);
 
     if (sec == 59) {
@@ -188,6 +202,7 @@ function startTimer() {
 
 // Manage direction change and prevent reverse
 addEventListener("keydown", (event) => {
+  if(isPaused) return;
   if ((event.key == "ArrowUp" || event.key == "w") && (snake.length==1 || direction !== "down")) {
     direction = "up";
   } else if ((event.key == "ArrowDown" || event.key == "s") && (snake.length==1 || direction !== "up")) {
@@ -198,3 +213,12 @@ addEventListener("keydown", (event) => {
     direction = "right";
   }
 });
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === " " || e.key === "p") {
+    isPaused = !isPaused;
+  }
+});
+
+
+
