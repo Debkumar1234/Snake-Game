@@ -31,7 +31,7 @@ let isPaused = false;
 let food = {
   x: Math.floor(Math.random() * rows),
   y: Math.floor(Math.random() * cols),
-}
+};
 
 const blocks = [];
 let snake = [
@@ -58,7 +58,6 @@ function render() {
   let head = null;
 
   blocks[`${food.x}-${food.y}`].classList.add("food");
-  
 
   if (direction === "left") {
     head = { x: snake[0].x, y: snake[0].y - 1 };
@@ -91,9 +90,11 @@ function render() {
     // Check if new food spawns on the snake body then recall respownFood
     do {
       respownFood();
-      var onSnake = snake.some(segment => segment.x === food.x && segment.y === food.y);
+      var onSnake = snake.some(
+        (segment) => segment.x === food.x && segment.y === food.y
+      );
     } while (onSnake);
-    
+
     snake.push(head);
 
     score += 10;
@@ -135,8 +136,9 @@ function terminateGame() {
 
 pauseResumeButton.addEventListener("click", () => {
   isPaused = !isPaused;
-  pauseResumeButton.querySelector(".btn-text").innerText =
-    isPaused ? "Resume" : "Pause";
+  pauseResumeButton.querySelector(".btn-text").innerText = isPaused
+    ? "Resume"
+    : "Pause";
   pauseResumeButton.classList.toggle("paused", isPaused);
 });
 
@@ -167,7 +169,7 @@ function restartGame() {
   startTimer();
 }
 
-function respownFood(){
+function respownFood() {
   blocks[`${food.x}-${food.y}`].classList.remove("food");
   food = {
     x: Math.floor(Math.random() * rows),
@@ -202,14 +204,26 @@ function startTimer() {
 
 // Manage direction change and prevent reverse
 addEventListener("keydown", (event) => {
-  if(isPaused) return;
-  if ((event.key == "ArrowUp" || event.key == "w") && (snake.length==1 || direction !== "down")) {
+  if (isPaused) return;
+  if (
+    (event.key == "ArrowUp" || event.key == "w") &&
+    (snake.length == 1 || direction !== "down")
+  ) {
     direction = "up";
-  } else if ((event.key == "ArrowDown" || event.key == "s") && (snake.length==1 || direction !== "up")) {
+  } else if (
+    (event.key == "ArrowDown" || event.key == "s") &&
+    (snake.length == 1 || direction !== "up")
+  ) {
     direction = "down";
-  } else if ((event.key == "ArrowLeft" || event.key == "a") && (snake.length==1 || direction !== "right")) {
+  } else if (
+    (event.key == "ArrowLeft" || event.key == "a") &&
+    (snake.length == 1 || direction !== "right")
+  ) {
     direction = "left";
-  } else if ((event.key == "ArrowRight" || event.key == "d") && (snake.length==1 || direction !== "left")) {
+  } else if (
+    (event.key == "ArrowRight" || event.key == "d") &&
+    (snake.length == 1 || direction !== "left")
+  ) {
     direction = "right";
   }
 });
@@ -217,8 +231,9 @@ addEventListener("keydown", (event) => {
 document.addEventListener("keydown", (e) => {
   if (e.key === " " || e.key === "p") {
     isPaused = !isPaused;
+    pauseResumeButton.querySelector(".btn-text").innerText = isPaused
+      ? "Resume"
+      : "Pause";
+    pauseResumeButton.classList.toggle("paused", isPaused);
   }
 });
-
-
-
